@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Questionário — Produtores Rurais</title>
+
+
+    <!-- =====================================================
+         CSS DO PROJETO
+         ===================================================== -->
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <!-- =====================================================
+         LEAFLET — CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIINfQ3V3Z9N9Y1wXQZJvGZk1QZ9Y5V6N4Q="
+        crossorigin=""
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         CABEÇALHO
+         ===================================================== -->
+
+    <header>
+
+        <h1>
+            Questionário sobre a Agricultura Familiar
+        </h1>
+
+        <p>
+            Este questionário faz parte de uma pesquisa sobre
+            a realidade dos produtores rurais e da agricultura familiar.
+        </p>
+
+        <p>
+            As informações coletadas serão utilizadas
+            exclusivamente para fins de pesquisa.
+        </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+         ===================================================== -->
+
+    <main>
+
+        <div id="indicador-etapa">
+            Etapa 1 de 9
+        </div>
+
+
+        <!-- =================================================
+             FORMULÁRIO
+             ================================================= -->
+
+        <form id="questionario">
+
+
+            <!-- ==============================================
+                 ETAPA 1 — IDENTIFICAÇÃO
+                 ============================================== -->
+
+            <section class="etapa">
+
+                <h2>
+                    1. Identificação do produtor
+                </h2>
+
+
+                <label for="nome">
+                    Nome do produtor:
+                </label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Digite seu nome"
+                >
+
+
+                <label for="contato">
+                    Telefone para contato:
+                </label>
+
+                <input
+                    type="tel"
+                    id="contato"
+                    name="telefone"
+                    placeholder="(00) 00000-0000"
+                >
+
+
+                <div class="navegacao">
+
+                    <button
+                        type="button"
+                        class="btn-proximo"
+                    >
+                        Próximo
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================================
+                 ETAPA 2 — LOCALIZAÇÃO
+                 ============================================== -->
+
+            <section class="etapa">
+
+                <h2>
+                    2. Localização da propriedade
+                </h2>
+
+
+                <p class="texto-localizacao">
+
+                    Para localizar a propriedade no mapa,
+                    toque no botão abaixo e permita o acesso
+                    à localização do seu celular.
+
+                </p>
+
+
+                <button
+                    type="button"
+                    id="btn-localizacao"
+                >
+                    📍 Obter minha localização
+                </button>
+
+
+                <div
+                    id="status-localizacao"
+                    class="status-localizacao"
+                >
+                    A localização ainda não foi obtida.
+                </div>
+
+
+                <!-- MAPA -->
+
+                <div id="mapa"></div>
+
+
+                <!-- COORDENADAS -->
+
+                <div class="coordenadas">
+
+                    <label for="latitude">
+                        Latitude:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="latitude"
+                        name="latitude"
+                        readonly
+                    >
+
+
+                    <label for="longitude">
+                        Longitude:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="longitude"
+                        name="longitude"
+                        readonly
+                    >
+
+
+                    <label for="precisao">
+                        Precisão aproximada:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="precisao"
+                        name="precisao"
+                        readonly
+                    >
+
+                </div>
+
+
+                <!-- LOCALIDADE -->
+
+                <label for="nucleo_rural">
+                    Núcleo rural / Assentamento:
+                </label>
+
+                <input
+                    type="text"
+                    id="nucleo_rural"
+                    name="nrural_assentamento"
+                    placeholder="Ex.: Núcleo Rural Capão da Erva"
+                >
+
+
+                <label for="municipio">
+                    Município:
+                </label>
+
+                <input
+                    type="text"
+                    id="municipio"
+                    name="municipio"
+                    placeholder="Digite o município"
+                >
+
+
+                <div class="navegacao">
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                    >
+                        Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-proximo"
+                    >
+                        Próximo
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================================
+                 ETAPA 3 — PRODUÇÃO
+                 ============================================== -->
+
+            <section class="etapa">
+
+                <h2>
+                    3. Características da produção
+                </h2>
+
+
+                <label for="tipo_producao">
+                    Qual é o principal tipo de produção
+                    da propriedade?
+                </label>
+
+                <select
+                    id="tipo_producao"
+                    name="tipo_producao"
+                >
+
+                    <option value="">
+                        Selecione uma opção
+                    </option>
+
+                    <option value="agricultura">
+                        Agricultura
+                    </option>
+
+                    <option value="pecuaria">
+                        Pecuária
+                    </option>
+
+                    <option value="agricultura_pecuaria">
+                        Agricultura e pecuária
+                    </option>
+
+                    <option value="horticultura">
+                        Horticultura
+                    </option>
+
+                    <option value="fruticultura">
+                        Fruticultura
+                    </option>
+
+                    <option value="outro">
+                        Outro
+                    </option>
+
+                </select>
+
+
+                <div
+                    id="campo_tipo_outro"
+                    class="campo-condicional"
+                >
+
+                    <label for="tipo_producao_outro">
+                        Qual?
+                    </label>
+
+                    <input
+                        type="text"
+                        id="tipo_producao_outro"
+                        name="tipo_producao_outro"
+                        placeholder="Especifique o tipo de produção"
+                    >
+
+                </div>
+
+
+                <label for="culturas">
+                    Quais são as principais culturas produzidas
+                    ou principais atividades produtivas?
+                </label>
+
+                <textarea
+                    id="culturas"
+                    name="cultura_criacao"
+                    rows="4"
+                    placeholder="Ex.: banana, milho, mandioca, avicultura, pecuária..."
+                ></textarea>
+
+
+                <label for="area">
+                    Qual é aproximadamente a área utilizada
+                    para produção?
+                </label>
+
+                <input
+                    type="number"
+                    id="area"
+                    name="area_ha"
+                    min="0"
+                    step="0.01"
+                    placeholder="Área em hectares"
+                >
+
+
+                <div class="navegacao">
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                    >
+                        Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-proximo"
+                    >
+                        Próximo
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================================
+                 ETAPA 4 — COMERCIALIZAÇÃO
+                 ============================================== -->
+
+            <section class="etapa">
+
+                <h2>
+                    4. Comercialização
+                </h2>
+
+
+                <label>
+                    Como ocorre principalmente a comercialização
+                    da sua produção?
+                </label>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="comercializacao_feira"
+                        name="comercializacao"
+                        value="feira"
+                    >
+
+                    <label for="comercializacao_feira">
+                        Feira / venda direta
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="comercializacao_mercado"
+                        name="comercializacao"
+                        value="mercado"
+                    >
+
+                    <label for="comercializacao_mercado">
+                        Mercados / supermercados
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="comercializacao_cooperativa"
+                        name="comercializacao"
+                        value="cooperativa"
+                    >
+
+                    <label for="comercializacao_cooperativa">
+                        Cooperativa / associação
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="comercializacao_pnae"
+                        name="comercializacao"
+                        value="pnae"
+                    >
+
+                    <label for="comercializacao_pnae">
+                        Programa de Alimentação Escolar (PNAE)
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="comercializacao_outro"
+                        name="comercializacao"
+                        value="outro"
+                    >
+
+                    <label for="comercializacao_outro">
+                        Outro
+                    </label>
+
+                </div>
+
+
+                <div class="navegacao">
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                    >
+                        Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-proximo"
+                    >
+                        Próximo
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================================
+                 ETAPA 5 — PROGRAMAS
+                 ============================================== -->
+
+            <section class="etapa">
+
+                <h2>
+                    5. Programas institucionais
+                </h2>
+
+
+                <label>
+                    Você participa atualmente de algum programa
+                    de apoio à agricultura familiar?
+                </label>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="programa_sim"
+                        name="programas_gov"
+                        value="sim"
+                    >
+
+                    <label for="programa_sim">
+                        Sim
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="programa_nao"
+                        name="programas_gov"
+                        value="nao"
+                    >
+
+                    <label for="programa_nao">
+                        Não
+                    </label>
+
+                </div>
+
+
+                <div
+                    id="campo_programa"
+                    class="campo-condicional"
+                >
+
+                    <label for="programa_nome">
+                        Qual programa?
+                    </label>
+
+                    <input
+                        type="text"
+                        id="programa_nome"
+                        name="programa_nome"
+                        placeholder="Ex.: PNAE, PAA..."
+                    >
+
+                </div>
+
+
+                <div class="navegacao">
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                    >
+                        Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-proximo"
+                    >
+                        Próximo
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================================
+                 ETAPA 6 — COOPERATIVA
+                 ============================================== -->
+
+            <section class="etapa">
+
+                <h2>
+                    6. Cooperativa ou associação
+                </h2>
+
+
+                <label>
+                    Participa de alguma cooperativa ou associação?
+                </label>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="cooperativa_sim"
+                        name="coop_assoc"
+                        value="sim"
+                    >
+
+                    <label for="cooperativa_sim">
+                        Sim
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="cooperativa_nao"
+                        name="coop_assoc"
+                        value="nao"
+                    >
+
+                    <label for="cooperativa_nao">
+                        Não
+                    </label>
+
+                </div>
+
+
+                <div
+                    id="campo_cooperativa"
+                    class="campo-condicional"
+                >
+
+                    <label for="nome_cooperativa">
+                        Qual?
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome_cooperativa"
+                        name="nome_cooperativa"
+                        placeholder="Nome da cooperativa ou associação"
+                    >
+
+                </div>
+
+
+                <div class="navegacao">
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                    >
+                        Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-proximo"
+                    >
+                        Próximo
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================================
+                 ETAPA 7 — DIFICULDADES
+                 ============================================== -->
+
+            <section class="etapa">
+
+                <h2>
+                    7. Principais dificuldades
+                </h2>
+
+
+                <label>
+                    Quais são as principais dificuldades
+                    enfrentadas na produção?
+                </label>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="checkbox"
+                        id="dificuldade_agua"
+                        name="dificuldades"
+                        value="agua"
+                    >
+
+                    <label for="dificuldade_agua">
+                        Disponibilidade de água
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="checkbox"
+                        id="dificuldade_clima"
+                        name="dificuldades"
+                        value="clima"
+                    >
+
+                    <label for="dificuldade_clima">
+                        Condições climáticas
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="checkbox"
+                        id="dificuldade_insumos"
+                        name="dificuldades"
+                        value="insumos"
+                    >
+
+                    <label for="dificuldade_insumos">
+                        Custo de insumos
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="checkbox"
+                        id="dificuldade_comercializacao"
+                        name="dificuldades"
+                        value="comercializacao"
+                    >
+
+                    <label for="dificuldade_comercializacao">
+                        Comercialização
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="checkbox"
+                        id="dificuldade_credito"
+                        name="dificuldades"
+                        value="credito"
+                    >
+
+                    <label for="dificuldade_credito">
+                        Acesso a crédito
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="checkbox"
+                        id="dificuldade_assistencia"
+                        name="dificuldades"
+                        value="assistencia"
+                    >
+
+                    <label for="dificuldade_assistencia">
+                        Assistência técnica
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="checkbox"
+                        id="dificuldade_outro"
+                        name="dificuldades"
+                        value="outro"
+                    >
+
+                    <label for="dificuldade_outro">
+                        Outro
+                    </label>
+
+                </div>
+
+
+                <div
+                    id="campo_dificuldade_outro"
+                    class="campo-condicional"
+                >
+
+                    <label for="dificuldade_outro_texto">
+                        Qual outra dificuldade?
+                    </label>
+
+                    <input
+                        type="text"
+                        id="dificuldade_outro_texto"
+                        name="dificuldade_outro_texto"
+                        placeholder="Especifique a dificuldade"
+                    >
+
+                </div>
+
+
+                <label for="dificuldades_observacao">
+                    Outras dificuldades / observações:
+                </label>
+
+                <textarea
+                    id="dificuldades_observacao"
+                    name="dificuldades_observacao"
+                    rows="4"
+                    placeholder="Descreva outras dificuldades..."
+                ></textarea>
+
+
+                <div class="navegacao">
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                    >
+                        Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-proximo"
+                    >
+                        Próximo
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================================
+                 ETAPA 8 — PARTICIPAÇÃO
+                 ============================================== -->
+
+            <section class="etapa">
+
+                <h2>
+                    8. Participação na pesquisa
+                </h2>
+
+
+                <label>
+                    Você teria interesse em participar de futuras
+                    etapas desta pesquisa?
+                </label>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="interesse_sim"
+                        name="interesse"
+                        value="sim"
+                    >
+
+                    <label for="interesse_sim">
+                        Sim
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="interesse_nao"
+                        name="interesse"
+                        value="nao"
+                    >
+
+                    <label for="interesse_nao">
+                        Não
+                    </label>
+
+                </div>
+
+
+                <div class="opcao">
+
+                    <input
+                        type="radio"
+                        id="interesse_talvez"
+                        name="interesse"
+                        value="talvez"
+                    >
+
+                    <label for="interesse_talvez">
+                        Talvez
+                    </label>
+
+                </div>
+
+
+                <div class="navegacao">
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                    >
+                        Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-proximo"
+                    >
+                        Próximo
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================================
+                 ETAPA 9 — FINALIZAÇÃO
+                 ============================================== -->
+
+            <section class="etapa">
+
+                <h2>
+                    9. Finalização
+                </h2>
+
+
+                <p>
+                    Obrigado por participar da pesquisa.
+                </p>
+
+                <p>
+                    Confira suas respostas e, se estiverem corretas,
+                    clique em "Enviar questionário".
+                </p>
+
+
+                <div class="navegacao">
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                    >
+                        Voltar
+                    </button>
+
+                    <button
+                        type="submit"
+                        id="btn-enviar"
+                    >
+                        Enviar questionário
+                    </button>
+
+                </div>
+
+            </section>
+
+
+        </form>
+
+    </main>
+
+
+    <!-- =====================================================
+         RODAPÉ
+         ===================================================== -->
+
+    <footer>
+
+        <p>
+            Pesquisa de Geografia Agrária
+        </p>
+
+    </footer>
+
+
+    <!-- =====================================================
+         LEAFLET — JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DO FORMULÁRIO
+         ===================================================== -->
+
+    <script src="formulario.js"></script>
+
+</body>
+
+</html>
