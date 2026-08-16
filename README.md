@@ -1,6 +1,6 @@
 # WebGIS de Cadastro de Produtores Rurais
 
-WebGIS desenvolvido como parte de um projeto de estágio, destinado à integração, visualização e organização de dados geográficos e informações coletadas em campo.
+WebGIS desenvolvido como parte de um projeto de estágio, destinado à integração, visualização e organização de dados geográficos e coleta de informações de forma remota,
 
 O sistema integra uma aplicação web de visualização cartográfica, uma API de backend, um banco de dados espacial PostgreSQL/PostGIS e um formulário para coleta de informações de produtores rurais.
 
