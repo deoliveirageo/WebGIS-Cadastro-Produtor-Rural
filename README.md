@@ -23,10 +23,6 @@ Entre as principais funcionalidades previstas estão:
 * integração entre dados geográficos, dados cadastrais e informações de campo.
 
 
-![Interface principal do WebGIS](images/webgis_principal.png)
-
-![Funcionalidades do WebGIS](images/webgis_funcoes.png)
-
 
 ## Arquitetura do sistema
 
@@ -119,7 +115,6 @@ O formulário funciona como uma aplicação cliente executada no navegador. Os d
 
 Posteriormente estas informações serão inseridas ao PostgreSQL/PostGIS para integração com o WebGIS. 
 
-![Questionário](images/questionario.png)
 
 ## Estrutura do repositório
 
