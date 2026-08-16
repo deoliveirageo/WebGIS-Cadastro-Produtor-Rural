@@ -22,6 +22,10 @@ Entre as principais funcionalidades previstas estão:
 * disponibilização de informações por meio de uma API;
 * integração entre dados geográficos, dados cadastrais e informações de campo.
 
+
+![Interface principal do WebGIS](WebGIS_Geografia_Agraria\README.md\webgis_principal.png")
+![Interface principal do WebGIS](WebGIS_Geografia_Agraria\README.md\webgis_funcoes.png")
+
 ## Arquitetura do sistema
 
 O projeto é organizado em quatro componentes principais:
@@ -112,6 +116,8 @@ Os dados coletados são encaminhados para o Google Apps Script e registrados em 
 O formulário funciona como uma aplicação cliente executada no navegador. Os dados preenchidos são enviados por meio de uma requisição HTTP ao Web App publicado no Google Apps Script, que processa as informações e as registra em uma planilha Google Sheets.
 
 Posteriormente estas informações serão inseridas ao PostgreSQL/PostGIS para integração com o WebGIS. 
+
+![Interface principal do WebGIS](WebGIS_Geografia_Agraria\README.md\questionario.png")
 
 ## Estrutura do repositório
 
