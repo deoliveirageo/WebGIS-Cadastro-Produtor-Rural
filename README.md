@@ -120,10 +120,12 @@ Os dados coletados são encaminhados para o Google Apps Script e registrados em 
 
 O formulário funciona como uma aplicação cliente executada no navegador. Os dados preenchidos são enviados por meio de uma requisição HTTP ao Web App publicado no Google Apps Script, que processa as informações e as registra em uma planilha Google Sheets.
 
-Posteriormente estas informações serão inseridas ao PostgreSQL/PostGIS para integração com o WebGIS. 
-
 
 ![Questionário](images/questionario.png)
+
+
+Posteriormente estas informações serão inseridas ao PostgreSQL/PostGIS para integração com o WebGIS. 
+
 
 ## Estrutura do repositório
 
@@ -240,7 +242,7 @@ PostgreSQL + PostGIS
 
 O formulário possui fluxo independente de publicação e coleta.
 
-Status do projeto
+## Status do projeto
 
 🚧 Em desenvolvimento
 
