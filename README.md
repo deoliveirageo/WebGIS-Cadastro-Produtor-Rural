@@ -1,4 +1,4 @@
-# WebGIS de Cadastro de Produtores Rurais 
+# WebGIS de Cadastro de Produtores Rurais
 
 WebGIS desenvolvido como parte de um projeto de estágio, destinado à integração, visualização e organização de dados geográficos e informações coletadas em campo.
 
@@ -6,7 +6,7 @@ O sistema integra uma aplicação web de visualização cartográfica, uma API d
 
 ## Sobre o projeto
 
-O projeto tem como objetivo desenvolver uma plataforma WebGIS para organização e visualização de informações cadastrais relacionadas a produtores rurais. 
+O projeto tem como objetivo desenvolver uma plataforma WebGIS para organização e visualização de informações cadastrais relacionadas a produtores rurais.
 
 A aplicação permite integrar diferentes fontes de dados geográficos e informações obtidas em campo, possibilitando sua representação espacial em um ambiente web interativo.
 
@@ -26,55 +26,61 @@ Entre as principais funcionalidades previstas estão:
 
 O projeto é organizado em quatro componentes principais:
 
-
+```text
                            USUÁRIO
-                              │
-                ┌─────────────┴─────────────┐
-                │                           │
-                ▼                           ▼
+                              |
+                +-------------+-------------+
+                |                           |
+                v                           v
            WEBGIS                        FORMULÁRIO
           frontend/                     formulario/
-                │                           │
-                │                           ▼
-                │                    Google Apps Script
-                │                           │
-                │                           ▼
-                │                     Google Sheets
-                │
-                ▼
+                |                           |
+                |                           v
+                |                    Google Apps Script
+                |                           |
+                |                           v
+                |                     Google Sheets
+                |
+                v
              BACKEND
         backend/server.cjs
-                │
-                ▼
+                |
+                v
                API
        routes/produtores.js
-                │
-                ▼
+                |
+                v
         PostgreSQL/PostGIS
-            
+```
+
 ## Frontend
 
 O frontend é responsável pela interface gráfica e pela interação do usuário com o WebGIS.
 
 Sua estrutura está organizada em:
 
-├── src/
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── main.js
-└── index.html
+```text
++-- src/
+|   +-- css/
+|   |   +-- style.css
+|   +-- js/
+|       +-- main.js
++-- index.html
+```
+
 O main.js concentra a inicialização e a lógica principal da aplicação, incluindo o carregamento das camadas georáficas e a configuração dos controles de interface. O arquivo index.html fornece a estrutura da página e referencia os scripts e estilos necessários. Já o css/style.css define a aparência visual da aplicação.
 
 ## Backend
 
 O backend funciona como camada intermediária entre o frontend e o banco de dados.
 
-├── backend/
-│   ├── dados/
-│   │   └── produtores.json
-├── .env.example
-└── server.cjs
+```text
++-- backend/
+|   +-- dados/
+|   |   +-- produtores.json
++-- .env.example
++-- server.cjs
+```
 
 O arquivo .env.example contém um modelo de variáveis de ambiente necessárias para rodar o backend.
 
@@ -94,44 +100,49 @@ A documentação da estrutura do banco de dados será organizada na pasta 'docs/
 
 O formulário constitui uma interface independente para coleta de informações de campo.
 
-├── formulario/
-│   ├── formulario.js
-│   ├── index.html
-│   └── style.css
+```text
++-- formulario/
+|   +-- formulario.js
+|   +-- index.html
+|   +-- style.css
+```
+
 Os dados coletados são encaminhados para o Google Apps Script e registrados em uma planilha Google Sheets, conforme a arquitetura definida para a coleta.
 
 O formulário funciona como uma aplicação cliente executada no navegador. Os dados preenchidos são enviados por meio de uma requisição HTTP ao Web App publicado no Google Apps Script, que processa as informações e as registra em uma planilha Google Sheets.
 
 ## Estrutura do repositório
 
+```text
 webgis-geografia-agraria/
-│
-├── README.md
-│
-├── frontend/
-│   ├── index.html
-│   ├── src/
-│   │   ├── js/
-│   │   │   └── main.js
-│   │   ├── css/
-│   │   │   └── style.css
-│   └── package.json
-│
-├── backend/
-│   ├── dados/
-│   │   └── produtores.json
-│   ├── .env.example
-│   └── server.cjs
-│
-├── formulario/
-│   ├── formulario.js
-│   ├── index.html
-│   └── style.cs
-│
-├── docs/
-│   ├── arquitetura.md
-│   ├── banco-de-dados.md
-│   └── api.md
+|
++-- README.md
+|
++-- frontend/
+|   +-- index.html
+|   +-- src/
+|   |   +-- js/
+|   |   |   +-- main.js
+|   |   +-- css/
+|   |       +-- style.css
+|   +-- package.json
+|
++-- backend/
+|   +-- dados/
+|   |   +-- produtores.json
+|   +-- .env.example
+|   +-- server.cjs
+|
++-- formulario/
+|   +-- formulario.js
+|   +-- index.html
+|   +-- style.cs
+|
++-- docs/
+    +-- arquitetura.md
+    +-- banco-de-dados.md
+    +-- api.md
+```
 
 ## Tecnologias
 
@@ -154,35 +165,39 @@ GitHub.
 
 ## Visualização no WebGIS
 
+```text
 PostgreSQL/PostGIS
-        │
-        ▼
+        |
+        v
      Backend
-        │
-        ▼
+        |
+        v
        API
-        │
-        ▼
+        |
+        v
     JavaScript
-        │
-        ▼
+        |
+        v
      Leaflet
-        │
-        ▼
+        |
+        v
      Usuário
-     
+```
+
 ## Coleta de informações:
 
+```text
 Produtor rural
-      │
-      ▼
+      |
+      v
 Formulário Web
-      │
-      ▼
+      |
+      v
 Google Apps Script
-      │
-      ▼
+      |
+      v
 Google Sheets
+```
 
 ## Documentação
 
@@ -192,17 +207,22 @@ Documento	Conteúdo
 docs/arquitetura.md	Arquitetura e funcionamento geral do sistema
 docs/banco-de-dados.md	Estrutura do PostgreSQL/PostGIS
 docs/api.md	Endpoints e funcionamento da API
+
 Instalação e execução
 
 As instruções de instalação e execução serão documentadas conforme cada componente do sistema for finalizado.
 
 De forma geral, a aplicação será executada a partir da seguinte estrutura:
 
+```text
 Frontend
-   ↓
+   |
+   v
 Backend / API
-   ↓
+   |
+   v
 PostgreSQL + PostGIS 
+```
 
 ## O formulário possui fluxo independente de publicação e coleta.
 
@@ -213,5 +233,6 @@ Status do projeto
 O projeto está sendo desenvolvido de forma incremental. Novas funcionalidades, camadas geográficas, endpoints e componentes da aplicação serão incorporados ao repositório conforme o desenvolvimento avançar.
 
 A licença do projeto será definida posteriormente.
+
 
 
