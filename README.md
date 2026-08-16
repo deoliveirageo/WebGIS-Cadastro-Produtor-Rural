@@ -29,7 +29,7 @@ O projeto é organizado em quatro componentes principais:
 ```text
                            USUÁRIO
                               |
-                +-------------+-------------+
+                |---------------------------|
                 |                           |
                 v                           v
            WEBGIS                        FORMULÁRIO
@@ -60,12 +60,12 @@ O frontend é responsável pela interface gráfica e pela interação do usuári
 Sua estrutura está organizada em:
 
 ```text
-+-- src/
-|   +-- css/
-|   |   +-- style.css
-|   +-- js/
-|       +-- main.js
-+-- index.html
+|-- src/
+|   |-- css/
+|   |   |-- style.css
+|   |-- js/
+|       |-- main.js
+|-- index.html
 ```
 
 O main.js concentra a inicialização e a lógica principal da aplicação, incluindo o carregamento das camadas georáficas e a configuração dos controles de interface. O arquivo index.html fornece a estrutura da página e referencia os scripts e estilos necessários. Já o css/style.css define a aparência visual da aplicação.
@@ -75,11 +75,11 @@ O main.js concentra a inicialização e a lógica principal da aplicação, incl
 O backend funciona como camada intermediária entre o frontend e o banco de dados.
 
 ```text
-+-- backend/
-|   +-- dados/
-|   |   +-- produtores.json
-+-- .env.example
-+-- server.cjs
+|-- backend/
+|   |-- dados/
+|   |   |-- produtores.json
+|-- .env.example
+|-- server.cjs
 ```
 
 O arquivo .env.example contém um modelo de variáveis de ambiente necessárias para rodar o backend.
@@ -101,10 +101,10 @@ A documentação da estrutura do banco de dados será organizada na pasta 'docs/
 O formulário constitui uma interface independente para coleta de informações de campo.
 
 ```text
-+-- formulario/
-|   +-- formulario.js
-|   +-- index.html
-|   +-- style.css
+|-- formulario/
+|   |-- formulario.js
+|   |-- index.html
+|   |-- style.css
 ```
 
 Os dados coletados são encaminhados para o Google Apps Script e registrados em uma planilha Google Sheets, conforme a arquitetura definida para a coleta.
@@ -116,32 +116,32 @@ O formulário funciona como uma aplicação cliente executada no navegador. Os d
 ```text
 webgis-geografia-agraria/
 |
-+-- README.md
+|-- README.md
 |
-+-- frontend/
-|   +-- index.html
-|   +-- src/
-|   |   +-- js/
-|   |   |   +-- main.js
-|   |   +-- css/
-|   |       +-- style.css
-|   +-- package.json
+|-- frontend/
+|   |-- index.html
+|   |-- src/
+|   |   |-- js/
+|   |   |   |-- main.js
+|   |   |-- css/
+|   |       |-- style.css
+|   |-- package.json
 |
-+-- backend/
-|   +-- dados/
-|   |   +-- produtores.json
-|   +-- .env.example
-|   +-- server.cjs
+|-- backend/
+|   |-- dados/
+|   |   |-- produtores.json
+|   |-- .env.example
+|   |-- server.cjs
 |
-+-- formulario/
-|   +-- formulario.js
-|   +-- index.html
-|   +-- style.cs
+|-- formulario/
+|   |-- formulario.js
+|   |-- index.html
+|   |-- style.cs
 |
-+-- docs/
-    +-- arquitetura.md
-    +-- banco-de-dados.md
-    +-- api.md
+|-- docs/
+    |-- arquitetura.md
+    |-- banco-de-dados.md
+    |-- api.md
 ```
 
 ## Tecnologias
@@ -224,7 +224,7 @@ Backend / API
 PostgreSQL + PostGIS 
 ```
 
-## O formulário possui fluxo independente de publicação e coleta.
+O formulário possui fluxo independente de publicação e coleta.
 
 Status do projeto
 
