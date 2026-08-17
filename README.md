@@ -146,7 +146,7 @@ webgis-geografia-agraria/
 |-- backend/
 |   |-- dados/
 |   |   |-- produtores.json
-|   |-- .env.example
+|   |-- .env
 |   |-- server.cjs
 |
 |-- formulario/
@@ -167,11 +167,12 @@ O projeto utiliza tecnologias de desenvolvimento web e geoprocessamento, incluin
 HTML5;
 CSS3;
 JavaScript;
-Leaflet;
+Openlayers;
 Node.js;
 API REST;
 PostgreSQL;
 PostGIS;
+GeoServer; 
 Google Apps Script;
 Google Sheets;
 Git;
@@ -194,7 +195,7 @@ PostgreSQL/PostGIS
     JavaScript
         |
         v
-     Leaflet
+     OpenLayers
         |
         v
      Usuário
