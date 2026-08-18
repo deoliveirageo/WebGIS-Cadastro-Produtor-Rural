@@ -69,9 +69,9 @@ function mostrarEtapa(numero) {
 
         setTimeout(function() {
 
-            mapa.invalidateSize();
+            mapa.invalidateSize(true);
 
-        }, 200);
+        }, 500);
 
     }
 
@@ -324,6 +324,19 @@ L.tileLayer(
             '&copy; OpenStreetMap contributors'
     }
 ).addTo(mapa);
+
+
+/*
+   Atualiza o tamanho do mapa após sua criação.
+   Isso evita problemas de posicionamento dos tiles
+   quando o mapa está dentro de uma etapa do formulário.
+*/
+
+setTimeout(function() {
+
+    mapa.invalidateSize(true);
+
+}, 500);
 
 
 /* ==========================================================
