@@ -52,6 +52,10 @@ Entre as funcionalidades implementadas estão:
 
 ![Questionário de produtores rurais](images/formulario.png)
 
+### Obtenção de Geolocalização do Produtor via Formulário
+
+![Geolocalizacao](images/geolocalizacao.png)
+
 ---
 
 ## Arquitetura do sistema
