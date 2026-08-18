@@ -62,18 +62,22 @@ function mostrarEtapa(numero) {
        precisamos atualizar o tamanho do mapa.
     */
 
-    if (
-        typeof mapa !== "undefined" &&
-        numero === 1
-    ) {
+  if (
+    typeof mapa !== "undefined" &&
+    numero === 1
+) {
 
-        setTimeout(function() {
+    requestAnimationFrame(function() {
+
+        requestAnimationFrame(function() {
 
             mapa.invalidateSize(true);
 
-        }, 500);
+        });
 
-    }
+    });
+
+}
 
 }
 
