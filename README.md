@@ -1,255 +1,381 @@
-# WebGIS de Cadastro de Produtores Rurais
+# WebGIS Geografia Agrária
 
-WebGIS desenvolvido como parte de um projeto de estágio, destinado à integração, visualização e organização de dados geográficos e coleta de informações de forma remota.
+WebGIS desenvolvido como parte de um projeto de estágio, destinado à integração, visualização e organização de dados geográficos relacionados ao espaço agrário e à coleta de informações de produtores rurais.
 
-O sistema integra uma aplicação web de visualização cartográfica, uma API de backend, um banco de dados espacial PostgreSQL/PostGIS e um formulário para coleta de informações de produtores rurais da reforma agrária.
+O projeto integra uma aplicação web de visualização cartográfica, uma API de backend, um banco de dados espacial PostgreSQL/PostGIS e uma aplicação independente de coleta de informações de produtores rurais.
+
+> **Status:** protótipo experimental para portfólio.
+> O WebGIS não está disponibilizado para consulta pública nesta etapa do projeto.
+
+---
 
 ## Sobre o projeto
 
-O projeto tem como objetivo desenvolver uma plataforma WebGIS para organização e visualização de informações cadastrais relacionadas a produtores rurais.
+O **WebGIS Geografia Agrária** foi desenvolvido como uma aplicação experimental voltada à organização, consulta e visualização espacial de informações relacionadas ao espaço agrário e ao cadastro de produtores rurais da reforma agrária. 
 
-A aplicação permite integrar diferentes fontes de dados geográficos e informações obtidas em campo e remotamente via formulário de cadastro, possibilitando sua representação espacial em um ambiente web interativo.
+A aplicação permite integrar diferentes conjuntos de dados geográficos e informações cadastrais em um ambiente cartográfico interativo, possibilitando a consulta de atributos e a representação espacial dos dados.
 
-Entre as principais funcionalidades previstas estão:
+Entre as funcionalidades implementadas estão:
 
-* visualização de camadas geográficas;
-* consulta e identificação de elementos espaciais;
-* representação de unidades hidrográficas;
-* visualização de rótulos e atributos das camadas;
-* consulta de informações de produtores;
-* coleta de dados por formulário;
-* armazenamento de dados espaciais em PostgreSQL/PostGIS;
-* disponibilização de informações por meio de uma API;
-* integração entre dados geográficos, dados cadastrais e informações de campo.
-  
+* visualização cartográfica interativa;
+* utilização do OpenStreetMap como mapa-base;
+* visualização de produtores rurais;
+* controle individual da visibilidade dos produtores;
+* consulta de informações cadastrais dos produtores;
+* visualização de assentamentos;
+* controle individual das camadas de assentamentos;
+* visualização de unidades hidrográficas;
+* controle individual das unidades hidrográficas;
+* identificação e exibição de rótulos das unidades hidrográficas;
+* consulta de atributos espaciais;
+* apresentação de informações em popups;
+* barra de status com zoom, escala, coordenadas e sistema de referência;
+* integração com PostgreSQL/PostGIS;
+* disponibilização de dados espaciais por meio de uma API;
+* formulário independente para coleta de informações de produtores rurais;
+* obtenção de localização por GPS no formulário;
+* armazenamento das respostas do formulário em Google Sheets por meio do Google Apps Script.
+
+---
+
+## Visualização do projeto
+
+### Interface principal
 
 ![Interface principal do WebGIS](images/webgis_principal.png)
 
+### Ferramentas e funcionalidades
 
+![Ferramentas e funcionalidades do WebGIS](images/webgis_funcoes.png)
 
-![Funcionalidades do WebGIS](images/webgis_funcoes.png)
+### Formulário de produtores rurais
 
+![Questionário de produtores rurais](images/questionario.png)
 
+---
 
 ## Arquitetura do sistema
 
-O projeto é organizado em quatro componentes principais:
+A arquitetura atual é composta por dois fluxos principais:
+
+1. **WebGIS:** consulta e visualização de dados espaciais armazenados no PostgreSQL/PostGIS por meio de uma API.
+2. **Formulário:** coleta de informações de produtores rurais e armazenamento das respostas em Google Sheets por meio do Google Apps Script.
 
 ```text
-                           USUÁRIO
-                              |
-                |---------------------------|
-                |                           |
-                v                           v
-           WEBGIS                        FORMULÁRIO
-          frontend/                     formulario/
-                |                           |
-                |                           v
-                |                    Google Apps Script
-                |                           |
-                |                           v
-                |                     Google Sheets
-                |
-                v
-             BACKEND
-        backend/server.cjs
-                |
-                v
-               API
-       routes/produtores.js
-                |
-                v
-        PostgreSQL/PostGIS
+                         WEBGIS GEOGRAFIA AGRÁRIA
+                                  │
+                  ┌───────────────┴────────────────┐
+                  │                                │
+                  ▼                                ▼
+          APLICAÇÃO WEBGIS                 FORMULÁRIO DE COLETA
+                  │                                │
+          Vite + OpenLayers                 HTML + Leaflet
+                  │                                │
+                  ▼                                ▼
+           API Express                    Google Apps Script
+                  │                                │
+                  ▼                                ▼
+          PostgreSQL/PostGIS                  Google Sheets
+                  │
+        ┌─────────┼───────────────┐
+        │         │               │
+        ▼         ▼               ▼
+   Produtores  Assentamentos  Unidades
+                            Hidrográficas
 ```
 
-## Frontend
+O frontend do WebGIS utiliza **OpenLayers**, enquanto o formulário utiliza **Leaflet** para a interface cartográfica de localização.
 
-O frontend é responsável pela interface gráfica e pela interação do usuário com o WebGIS.
+A comunicação entre o WebGIS e o banco de dados ocorre por meio do backend. O navegador não realiza conexão direta com o PostgreSQL/PostGIS.
 
-Sua estrutura está organizada em:
+---
+
+## Frontend WebGIS
+
+A interface cartográfica utiliza:
+
+* HTML5;
+* CSS3;
+* JavaScript;
+* Vite;
+* OpenLayers;
+* OpenStreetMap.
+
+O frontend é responsável pela representação cartográfica, interação com as camadas e apresentação das informações ao usuário.
+
+Entre suas funções estão:
+
+* inicialização do mapa;
+* carregamento do mapa-base;
+* carregamento dos produtores por GeoJSON;
+* carregamento dos assentamentos;
+* carregamento das unidades hidrográficas;
+* controle individual das camadas;
+* rótulos das unidades hidrográficas;
+* identificação de elementos;
+* popups informativos;
+* sidebar;
+* barra de status;
+* controle de zoom;
+* escala cartográfica;
+* coordenadas do cursor.
+
+---
+
+## Backend e API
+
+O backend foi desenvolvido em **Node.js** utilizando **Express** e funciona como camada intermediária entre o frontend e o banco de dados espacial.
+
+Entre as principais tecnologias utilizadas estão:
+
+* Node.js;
+* Express;
+* `pg`;
+* CORS;
+* dotenv;
+* PostgreSQL;
+* PostGIS.
+
+A API disponibiliza atualmente endpoints para:
 
 ```text
-|-- src/
-|   |-- css/
-|   |   |-- style.css
-|   |-- js/
-|       |-- main.js
-|-- index.html
+GET  /
+POST /api/produtores
+GET  /api/produtores
+GET  /api/produtores/geojson
+GET  /api/assentamentos/:assentamento
+GET  /api/camadas/unidades-hidrograficas
 ```
 
-O main.js concentra a inicialização e a lógica principal da aplicação, incluindo o carregamento das camadas georáficas e a configuração dos controles de interface. O arquivo index.html fornece a estrutura da página e referencia os scripts e estilos necessários. Já o css/style.css define a aparência visual da aplicação.
+Os dados espaciais são disponibilizados ao frontend principalmente no formato **GeoJSON**.
 
-## Backend
+---
 
-O backend funciona como camada intermediária entre o frontend e o banco de dados.
+## Banco de dados espacial
+
+O projeto utiliza **PostgreSQL com a extensão PostGIS** para armazenamento e consulta dos principais dados espaciais.
+
+A estrutura atualmente utilizada pelo backend contempla:
 
 ```text
-|-- backend/
-|   |-- dados/
-|   |   |-- produtores.json
-|-- .env.example
-|-- server.cjs
+cadastro_produtores
+└── produtores
+
+assentamentos_bartolomeu
+├── assentamento_1
+├── assentamento_2
+└── assentamento_3
+
+unidades_hidrograficas_df
+└── unidades_hidrograficas
 ```
 
-O arquivo .env.example contém um modelo de variáveis de ambiente necessárias para rodar o backend.
+Os produtores são representados espacialmente como pontos. Os assentamentos e as unidades hidrográficas utilizam geometrias poligonais.
 
-O servidor é responsável por disponibilizar a API e processar as requisições realizadas pelo frontend.
+O PostGIS também é utilizado para operações de transformação de sistemas de referência e conversão das geometrias para GeoJSON.
 
+**A nomenclatura real dos esquemas e tabelas utilizadas no banco de dados foram alterados nesta documentação por razões de privacidade**
 
-## Banco de Dados
+**os dados de produtores, assentamentos e unidades hidrográficas utilizados neste projeto foram utilizados como estudo de caso atribuído em etágio supervisionado aplicado a pesquisa em Geografia Agrária**
 
-O projeto utiliza PostgreSQL com a extensão PostGIS para armazenamento e consulta de dados espaciais.
+---
 
-O banco de dados é utilizado pelo backend para persistência e consulta das informações que serão utilizadas no WebGIS.
+## Formulário de produtores rurais
 
-A documentação da estrutura do banco de dados será organizada na pasta 'docs/' incluindo schemas, tabelas, relacionamentos e campos geométricos utilizando o PostGIS, garantindo a integração consistente com o backend.
+O projeto possui uma aplicação independente destinada à coleta de informações de produtores rurais.
 
-## Formulário
+O formulário utiliza:
 
-O formulário constitui uma interface independente para coleta de informações de campo.
+* HTML;
+* CSS;
+* JavaScript;
+* Leaflet;
+* OpenStreetMap;
+* Geolocation API;
+* Google Apps Script;
+* Google Sheets.
 
-```text
-|-- formulario/
-|   |-- formulario.js
-|   |-- index.html
-|   |-- style.css
-```
+A aplicação permite obter a localização da propriedade por meio do dispositivo do usuário, registrando:
 
-Os dados coletados são encaminhados para o Google Apps Script e registrados em uma planilha Google Sheets, conforme a arquitetura definida para a coleta.
+* latitude;
+* longitude;
+* precisão GPS.
 
-O formulário funciona como uma aplicação cliente executada no navegador. Os dados preenchidos são enviados por meio de uma requisição HTTP ao Web App publicado no Google Apps Script, que processa as informações e as registra em uma planilha Google Sheets.
-
-
-![Questionário](images/questionario.png)
-
-
-Posteriormente estas informações serão inseridas ao PostgreSQL/PostGIS para integração com o WebGIS. 
-
-
-## Estrutura do repositório
-
-```text
-webgis-geografia-agraria/
-|
-|-- README.md
-|
-|-- frontend/
-|   |-- index.html
-|   |-- src/
-|   |   |-- js/
-|   |   |   |-- main.js
-|   |   |-- css/
-|   |       |-- style.css
-|   |-- package.json
-|
-|-- backend/
-|   |-- dados/
-|   |   |-- produtores.json
-|   |-- .env
-|   |-- server.cjs
-|
-|-- formulario/
-|   |-- formulario.js
-|   |-- index.html
-|   |-- style.cs
-|
-|-- docs/
-    |-- arquitetura.md
-    |-- banco-de-dados.md
-    |-- api.md
-```
-
-## Tecnologias
-
-O projeto utiliza tecnologias de desenvolvimento web e geoprocessamento, incluindo:
-
-HTML5;
-CSS3;
-JavaScript;
-Openlayers;
-Leaflet;
-Node.js;
-API REST;
-PostgreSQL;
-PostGIS;
-GeoServer; 
-Google Apps Script;
-Google Sheets;
-Git;
-GitHub.
-
-## Fluxo de dados
-
-## Visualização no WebGIS
-
-```text
-PostgreSQL/PostGIS
-        |
-        v
-     Backend
-        |
-        v
-       API
-        |
-        v
-    JavaScript
-        |
-        v
-     OpenLayers
-        |
-        v
-     Usuário
-```
-
-## Coleta de informações:
+O fluxo atual de armazenamento é:
 
 ```text
 Produtor rural
-      |
-      v
+      │
+      ▼
 Formulário Web
-      |
-      v
+      │
+      ▼
+Geolocation API
+      │
+      ▼
 Google Apps Script
-      |
-      v
+      │
+      ▼
 Google Sheets
 ```
 
-## Documentação
+### Integração futura
 
-A documentação técnica detalhada está organizada na pasta docs/.
+A integração direta entre os dados coletados pelo formulário e o PostgreSQL/PostGIS constitui uma possibilidade de evolução do projeto.
 
-Documento	Conteúdo
-docs/arquitetura.md	Arquitetura e funcionamento geral do sistema
-docs/banco-de-dados.md	Estrutura do PostgreSQL/PostGIS
-docs/api.md	Endpoints e funcionamento da API
+Nesta versão, o armazenamento das respostas do questionário ocorre de forma independente no Google Sheets.
 
-Instalação e execução
+---
 
-As instruções de instalação e execução serão documentadas conforme cada componente do sistema for finalizado.
+## Fluxo de dados do WebGIS
 
-De forma geral, a aplicação será executada a partir da seguinte estrutura:
+O fluxo de consulta espacial ocorre da seguinte maneira:
+
+```text
+PostgreSQL/PostGIS
+        │
+        ▼
+     Backend
+        │
+        ▼
+       API
+        │
+        ▼
+     GeoJSON
+        │
+        ▼
+    OpenLayers
+        │
+        ▼
+     Usuário
+```
+
+O frontend solicita os dados por meio da API, o backend realiza as consultas no PostgreSQL/PostGIS e retorna os dados espaciais em formato adequado à visualização cartográfica.
+
+---
+
+## Tecnologias
+
+| Área                        | Tecnologia            |
+| --------------------------- | --------------------- |
+| Linguagem                   | JavaScript            |
+| Estrutura web               | HTML5 / CSS3          |
+| Desenvolvimento frontend    | Vite                  |
+| WebGIS                      | OpenLayers            |
+| Mapa do formulário          | Leaflet               |
+| Mapa-base                   | OpenStreetMap         |
+| Backend                     | Node.js / Express     |
+| API                         | HTTP / JSON / GeoJSON |
+| Banco de dados              | PostgreSQL            |
+| Banco espacial              | PostGIS               |
+| Conexão com PostgreSQL      | `pg`                  |
+| Variáveis de ambiente       | dotenv                |
+| Geolocalização              | Geolocation API       |
+| Coleta de dados             | Google Apps Script    |
+| Armazenamento do formulário | Google Sheets         |
+| Versionamento               | Git / GitHub          |
+
+---
+
+## Documentação técnica
+
+A documentação detalhada do sistema está organizada na pasta [`docs/`](docs/).
+
+| Documento                                     | Conteúdo                                                          |
+| --------------------------------------------- | ----------------------------------------------------------------- |
+| [`arquitetura.md`](docs/arquitetura.md)       | Arquitetura geral e funcionamento do sistema                      |
+| [`banco-de-dados.md`](docs/banco-de-dados.md) | Estrutura do PostgreSQL/PostGIS e organização dos dados espaciais |
+| [`api.md`](docs/api.md)                       | Endpoints, métodos HTTP e funcionamento da API                    |
+
+---
+
+## Estrutura do repositório
+
+Nesta etapa, o repositório GitHub está organizado prioritariamente como **documentação e apresentação do projeto**:
+
+```text
+webgis-geografia-agraria/
+│
+├── README.md
+│
+├── formulario.js
+├── index.html
+├── style.css
+│
+├── images/
+│   ├── webgis_principal.png
+│   ├── webgis_funcoes.png
+│   └── questionario.png
+│
+└── docs/
+    ├── arquitetura.md
+    ├── banco-de-dados.md
+    └── api.md
+```
+
+O código-fonte completo do ambiente de desenvolvimento não é disponibilizado publicamente nesta etapa.
+
+O projeto continua sendo desenvolvido e executado em ambiente local.
+
+---
+
+## Ambiente de desenvolvimento
+
+A versão experimental do sistema utiliza um ambiente local composto por:
 
 ```text
 Frontend
-   |
-   v
+   │
+   ▼
+Vite
+   │
+   ▼
 Backend / API
-   |
-   v
-PostgreSQL + PostGIS 
+   │
+   ▼
+PostgreSQL + PostGIS
 ```
 
-O formulário possui fluxo independente de publicação e coleta.
+O formulário possui fluxo independente:
+
+```text
+Formulário
+   │
+   ▼
+Google Apps Script
+   │
+   ▼
+Google Sheets
+```
+
+As configurações de banco de dados e demais variáveis sensíveis são mantidas no ambiente local e não fazem parte da documentação pública do repositório.
+
+---
 
 ## Status do projeto
 
-🚧 Em desenvolvimento
+**🚧 Protótipo experimental — em desenvolvimento**
 
-O projeto está sendo desenvolvido de forma incremental. Novas funcionalidades, camadas geográficas, endpoints e componentes da aplicação serão incorporados ao repositório conforme o desenvolvimento avançar.
+O projeto encontra-se em desenvolvimento incremental e é utilizado atualmente como modelo experimental e objeto de portfólio.
+
+A versão atual concentra-se na implementação e demonstração da arquitetura de um WebGIS aplicado à Geografia Agrária, incluindo:
+
+* visualização cartográfica;
+* integração com banco espacial;
+* API para disponibilização de dados;
+* consulta de produtores rurais;
+* representação de assentamentos;
+* representação de unidades hidrográficas;
+* coleta remota de informações;
+* geolocalização;
+* documentação técnica.
+
+Novas funcionalidades, camadas geográficas e integrações poderão ser incorporadas futuramente conforme a evolução do projeto.
+
+O WebGIS **não está disponibilizado para consulta pública nesta etapa**.
+
+---
+
+## Licença
 
 A licença do projeto será definida posteriormente.
-
-
-
