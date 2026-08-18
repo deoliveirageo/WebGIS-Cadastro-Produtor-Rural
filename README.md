@@ -50,7 +50,7 @@ Entre as funcionalidades implementadas estão:
 
 ### Formulário de produtores rurais
 
-![Questionário de produtores rurais](images/questionario.png)
+![Questionário de produtores rurais](images/formulario.png)
 
 ---
 
