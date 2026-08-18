@@ -8,7 +8,7 @@ O sistema integra uma aplicação web de visualização cartográfica, uma API d
 
 O projeto tem como objetivo desenvolver uma plataforma WebGIS para organização e visualização de informações cadastrais relacionadas a produtores rurais.
 
-A aplicação permite integrar diferentes fontes de dados geográficos e informações obtidas em campo, possibilitando sua representação espacial em um ambiente web interativo.
+A aplicação permite integrar diferentes fontes de dados geográficos e informações obtidas em campo e remotamente via formulário de cadastro, possibilitando sua representação espacial em um ambiente web interativo.
 
 Entre as principais funcionalidades previstas estão:
 
