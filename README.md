@@ -1,6 +1,6 @@
 # WebGIS Geografia Agrária
 
-WebGIS desenvolvido como parte de um projeto de estágio, destinado à integração, visualização e organização de dados geográficos relacionados ao espaço agrário e à coleta de informações de produtores rurais.
+WebGIS desenvolvido como parte de um projeto de estágio, destinado à integração, visualização e organização de dados geográficos relacionados ao espaço agrário e à coleta de informações de produtores rurais, que funciona como uma base cadastral de produtores ruais com geolocalização. 
 
 O projeto integra uma aplicação web de visualização cartográfica, uma API de backend, um banco de dados espacial PostgreSQL/PostGIS e uma aplicação independente de coleta de informações de produtores rurais.
 
