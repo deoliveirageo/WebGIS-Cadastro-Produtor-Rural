@@ -21,7 +21,7 @@ Entre as principais funcionalidades previstas estão:
 * armazenamento de dados espaciais em PostgreSQL/PostGIS;
 * disponibilização de informações por meio de uma API;
 * integração entre dados geográficos, dados cadastrais e informações de campo.
-* 
+  
 
 ![Interface principal do WebGIS](images/webgis_principal.png)
 
@@ -95,7 +95,6 @@ O arquivo .env.example contém um modelo de variáveis de ambiente necessárias 
 
 O servidor é responsável por disponibilizar a API e processar as requisições realizadas pelo frontend.
 
-A separação entre frontend, backend e banco de dados permite evitar a exposição das credenciais do banco diretamente no navegador.
 
 ## Banco de Dados
 
